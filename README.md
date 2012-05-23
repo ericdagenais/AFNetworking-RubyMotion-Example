@@ -22,7 +22,7 @@ Run the example
 * RubyMotion
 * CocoaPods
 
-Interested in ReskKit instead of AFNetworking? Checkout [RestKitTest][RKT].
+Interested in RestKit instead of AFNetworking? Checkout [RestKitTest][RKT].
 
 [AF]: https://github.com/AFNetworking/AFNetworking
 [RM]: http://www.rubymotion.com/
