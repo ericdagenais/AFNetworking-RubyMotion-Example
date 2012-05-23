@@ -16,6 +16,37 @@ Run the example
         cd AFNetworking-RubyMotion-Example
         rake
 
+### Caveats
+
+#### `nil` Callback Blocks
+
+The Objective-C examples for AFNetworking often pass in `nil` as callback blocks. In RubyMotion, passing in nil to these callbacks causes a crash. To avoid crashing, pass in an empty proc *with the correct number of parameters*.
+
+For example, passing in `nil` to `failure:` below works in Objective-C but will cause a crash in RubyMotion if the request fails:
+
+``` objective-c
+NSURL *url = [NSURL URLWithString:@"http://api.twitter.com/1/statuses/public_timeline.json"];
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    NSLog(@"Public Timeline: %@", JSON);
+} failure:nil];
+[operation start];
+```
+
+Therefore, the above should be written as to avoid problems:
+
+``` ruby
+url = NSURL.URLWithString("http://api.twitter.com/1/statuses/public_timeline.json")
+request = NSURLRequest.requestWithURL(url)
+operation = AFJSONRequestOperation.JSONRequestOperationWithRequest(request, success:lambda {
+  |request, response, json|
+  NSLog("Public Timeline: %@", json)
+}, failure:lambda {
+  |request, response, error, json| # correct number of parameters is important
+})
+operation.start
+```
+
 ### Dependencies
 
 * XCode 4.x w/ iOS SDK 5.x
