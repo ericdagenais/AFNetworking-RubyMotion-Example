@@ -47,6 +47,8 @@ operation = AFJSONRequestOperation.JSONRequestOperationWithRequest(request, succ
 operation.start
 ```
 
+[Groups discussion][GG]
+
 ### Dependencies
 
 * XCode 4.x w/ iOS SDK 5.x
@@ -59,3 +61,4 @@ Interested in RestKit instead of AFNetworking? Checkout [RestKitTest][RKT].
 [RM]: http://www.rubymotion.com/
 [CP]: http://www.rubymotion.com/developer-center/articles/cocoapods/
 [RKT]: https://github.com/rounders/RestKitTest
+[GG]: https://groups.google.com/forum/#!topic/rubymotion/rYpwQKyCzRQ
