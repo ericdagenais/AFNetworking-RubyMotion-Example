@@ -33,7 +33,7 @@ AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperation
 [operation start];
 ```
 
-Therefore, the above should be written as to avoid problems:
+Therefore, the above should be written as the following to avoid problems:
 
 ``` ruby
 url = NSURL.URLWithString("http://api.twitter.com/1/statuses/public_timeline.json")
