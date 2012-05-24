@@ -20,7 +20,7 @@ Run the example
 
 #### `nil` Callback Blocks
 
-The Objective-C examples for AFNetworking often pass in `nil` as callback blocks. In RubyMotion, passing in nil to these callbacks causes a crash. To avoid crashing, pass in an empty proc *with the correct number of parameters*.
+The Objective-C examples for AFNetworking often pass in `nil` as callback blocks. In RubyMotion, passing in nil to these callbacks causes a crash if the callback ever needs to be called. To avoid crashing, pass in an empty proc *with the correct number of parameters*.
 
 For example, passing in `nil` to `failure:` below works in Objective-C but will cause a crash in RubyMotion if the request fails:
 
