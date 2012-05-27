@@ -17,3 +17,5 @@ task :vendorclean => [:clean] do
   sh "rm", "-rf", "vendor/build"
   sh "rm", "-rf", "vendor/Pods"
 end
+
+task :run => [:default]
