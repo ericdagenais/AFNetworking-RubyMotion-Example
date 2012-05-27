@@ -1,39 +1,31 @@
 class MyTableViewController < UITableViewController
   def viewDidLoad
-    @json = []
+    @data = []
     @pullToRefreshView = SSPullToRefreshView.alloc.initWithScrollView(self.tableView, delegate:self)
     loadData
   end
 
   def tableView(tableView, numberOfRowsInSection:section)
-    @json.length
+    @data.length
   end
 
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     cell = tableView.dequeueReusableCellWithIdentifier("test") || UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:"test")
-    cell.textLabel.text =  @json[indexPath.row]['text']
-    cell.detailTextLabel.text = @json[indexPath.row]['user']['name']
+    cell.textLabel.text =  @data[indexPath.row]['text']
+    cell.detailTextLabel.text = @data[indexPath.row]['user']['name']
     cell
   end
 
   def loadData
-    @pullToRefreshView.startLoading
-    url = NSURL.URLWithString("http://api.twitter.com/1/statuses/public_timeline.json")
-    request = NSURLRequest.requestWithURL(url)
-    NSLog("%@", url)
-    AFJSONRequestOperation.JSONRequestOperationWithRequest(request, success:lambda {
-      |request, response, json|
-      @json = json
+    TwitterApiClient.instance.getPublicTimeline do |response|
+      @data = response unless response.nil?
       self.view.reloadData
-      @pullToRefreshView.finishLoading
-    }, failure:lambda {
-      |request, response, error, json|
-      @pullToRefreshView.finishLoading
-      NSLog("error [%@]: %@", request.URL, error)
-    }).start
+    end
   end
 
   def pullToRefreshViewDidStartLoading(view)
+    @pullToRefreshView.startLoading
     self.loadData
+    @pullToRefreshView.finishLoading
   end
 end
