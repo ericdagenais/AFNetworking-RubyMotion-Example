@@ -1,6 +1,7 @@
 class MyTableViewController < UITableViewController
   def viewDidLoad
     @json = []
+    @pullToRefreshView = SSPullToRefreshView.alloc.initWithScrollView(self.tableView, delegate:self)
     loadData
   end
 
@@ -16,14 +17,23 @@ class MyTableViewController < UITableViewController
   end
 
   def loadData
-    request = NSURLRequest.requestWithURL NSURL.URLWithString("http://api.twitter.com/1/statuses/public_timeline.json")
+    @pullToRefreshView.startLoading
+    url = NSURL.URLWithString("http://api.twitter.com/1/statuses/public_timeline.json")
+    request = NSURLRequest.requestWithURL(url)
+    NSLog("%@", url)
     AFJSONRequestOperation.JSONRequestOperationWithRequest(request, success:lambda {
       |request, response, json|
       @json = json
       self.view.reloadData
+      @pullToRefreshView.finishLoading
     }, failure:lambda {
       |request, response, error, json|
+      @pullToRefreshView.finishLoading
       NSLog("error [%@]: %@", request.URL, error)
     }).start
+  end
+
+  def pullToRefreshViewDidStartLoading(view)
+    self.loadData
   end
 end

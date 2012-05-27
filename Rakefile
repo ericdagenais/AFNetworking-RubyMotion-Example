@@ -8,5 +8,12 @@ Motion::Project::App.setup do |app|
 
   app.pods do
     dependency 'AFNetworking'
+    dependency 'SSPullToRefresh'
   end
+end
+
+desc "Clean the vendor build folder"
+task :vendorclean => [:clean] do
+  sh "rm", "-rf", "vendor/build"
+  sh "rm", "-rf", "vendor/Pods"
 end
