@@ -6,3 +6,4 @@ resources/*.storyboardc
 vendor/Pods
 
 tags
+Podfile.lock

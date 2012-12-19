@@ -12,13 +12,13 @@ class MyTableViewController < UITableViewController
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     cell = tableView.dequeueReusableCellWithIdentifier("test") || UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:"test")
     cell.textLabel.text =  @data[indexPath.row]['text']
-    cell.detailTextLabel.text = @data[indexPath.row]['user']['name']
+    cell.detailTextLabel.text = @data[indexPath.row]['from_user_name']
     cell
   end
 
   def loadData
     TwitterApiClient.instance.getPublicTimeline do |response|
-      @data = response unless response.nil?
+      @data = response['results'] unless response.nil?
       self.view.reloadData
     end
   end
