@@ -7,3 +7,4 @@ vendor/Pods
 
 tags
 Podfile.lock
+Gemfile.lock

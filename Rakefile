@@ -1,7 +1,8 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'rubygems'
 require 'motion/project'
-require 'motion-cocoapods'
+require 'bundler'
+Bundler.require
 
 Motion::Project::App.setup do |app|
   app.name = 'AFNetworking'

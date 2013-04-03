@@ -4,16 +4,16 @@ An example to demonstrate the use of [AFNetworking][AF] with [RubyMotion][RM].
 
 ### Quickstart
 
-If you haven't already done so, install both the 'cocoapods' and 'motion-cocoapods' gems (see this [article][CP] for more info)
+        git clone https://github.com/ericdagenais/AFNetworking-RubyMotion-Example.git
+        cd AFNetworking-RubyMotion-Example
 
-        sudo gem install cocoapods
-        pod setup
-        sudo gem install motion-cocoapods
+Install both the 'cocoapods' and 'motion-cocoapods' gems via bundler (see this [article][CP] for more info). Gemfile installs specific versions to workaround an [incompatibility][BB] with the latest Cocoapods gem.
+
+        # gem install bundler  # install bundler if you don't have it already
+        bundle install
 
 Run the example
 
-        git clone https://github.com/ericdagenais/AFNetworking-RubyMotion-Example.git
-        cd AFNetworking-RubyMotion-Example
         rake
 
 ### Caveats
@@ -62,3 +62,4 @@ Interested in RestKit instead of AFNetworking? Checkout [RestKitTest][RKT].
 [CP]: http://www.rubymotion.com/developer-center/articles/cocoapods/
 [RKT]: https://github.com/rounders/RestKitTest
 [GG]: https://groups.google.com/forum/#!topic/rubymotion/rYpwQKyCzRQ
+[BB]: https://github.com/HipByte/motion-cocoapods/issues/51
